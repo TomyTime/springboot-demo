@@ -1,45 +1,32 @@
 package com.tt.op.rserve;
 
-import org.rosuda.REngine.REXPMismatchException;
 import org.rosuda.REngine.Rserve.RConnection;
 import org.rosuda.REngine.Rserve.RserveException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by tty on 23/01/2018.
  */
-public class RserveClient {
-    private RConnection connection;
+@Component
+public class RServeClient {
+    @Value("${rserve.host}")
+    private String host;
+    @Value("${rserve.port}")
+    private Integer port;
 
     /**
-     * @param host ip/domain
-     * @param port prot
      * @return
      * @throws RserveException
-     * @throws REXPMismatchException
      */
-    public RserveClient(String host, int port) throws RserveException, REXPMismatchException {
-        connection = new RConnection(host, port);
-        System.out.format("连接 %s:%s 成功", host, port);
-    }
-
-    public RserveClient() throws RserveException {
-        connection = new RConnection();
-    }
+    public RServeClient() throws RserveException {}
 
     /**
      * get connection
      * @return
      */
-    public RConnection getConnection(){
-        return connection;
+    public RConnection getConnection() throws RserveException {
+        return new RConnection(host, port);
     }
 
-    /**
-     * close connection
-     */
-    public void closeConnection(){
-        if(null != connection){
-            connection.close();
-        }
-    }
 }

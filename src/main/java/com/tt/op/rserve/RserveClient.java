@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by tty on 23/01/2018.
+ * Created by TomyTime on 23/01/2018.
  */
 @Component
 public class RServeClient {
